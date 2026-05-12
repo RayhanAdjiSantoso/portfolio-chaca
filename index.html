@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aprilia Angelica — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink-deep:#E8539F;--pink-mid:#F0A0CC;--pink-light:#FFD6E8;
+  --peach:#FFB899;--orange-accent:#F0A050;--beige:#F5EDE8;
+  --cream:#FDF8F5;--white:#FFFFFF;--text-dark:#2D1F1F;--text-mid:#6B4F4F;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;color:var(--text-dark);background:var(--cream);overflow-x:hidden}
+
+/* Navbar */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s}
+#navbar.scrolled{background:rgba(253,248,245,0.93);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(232,83,159,0.1)}
+.nav-logo{font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--pink-deep);text-decoration:none}
+.nav-links{display:flex;gap:0.4rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:600;padding:0.35rem 0.85rem;border-radius:50px;transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{background:var(--pink-light);color:var(--pink-deep)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--pink-deep);border-radius:2px}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(253,248,245,0.97);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1.4rem;color:var(--pink-deep);text-decoration:none;font-weight:700}
+.close-btn{position:absolute;top:1.5rem;right:2rem;font-size:1.5rem;color:var(--pink-deep);cursor:pointer;background:none;border:none}
+
+/* Hero */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#FDF8F5 0%,#FFD6E8 40%,#FFB899 100%);position:relative;overflow:hidden;padding:6rem 2rem 3rem}
+.hero-inner{max-width:1100px;width:100%;display:flex;align-items:center;gap:4rem}
+.hero-text{flex:1;z-index:2}
+.hero-label{font-family:'Dancing Script',cursive;font-size:1.15rem;color:var(--pink-deep);margin-bottom:0.5rem;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1.1;color:var(--text-dark);margin-bottom:0.8rem;opacity:0;animation:fadeUp 0.7s 0.4s forwards}
+.hero-name span{color:var(--pink-deep)}
+.hero-tagline{font-size:0.92rem;color:var(--text-mid);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.2rem;opacity:0;animation:fadeUp 0.7s 0.6s forwards}
+.hero-bio{font-size:1.05rem;color:var(--text-mid);line-height:1.8;max-width:480px;margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s 0.8s forwards}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.7s 1s forwards}
+.btn-primary{background:var(--pink-deep);color:white;border:none;padding:0.8rem 1.8rem;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.3s;display:inline-block}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,83,159,0.35)}
+.btn-outline{background:transparent;color:var(--pink-deep);border:2px solid var(--pink-deep);padding:0.75rem 1.8rem;border-radius:50px;font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.3s;display:inline-block}
+.btn-outline:hover{background:var(--pink-light);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:1.5rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s 1.2s forwards}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--pink-deep)}
+.stat-label{font-size:0.72rem;color:var(--text-mid);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.hero-photo{flex-shrink:0;position:relative;z-index:2;opacity:0;animation:fadeUp 0.7s 0.5s forwards}
+.photo-frame{width:320px;height:380px;border-radius:60% 40% 55% 45%/50% 50% 50% 50%;background:linear-gradient(135deg,var(--pink-mid),var(--peach));display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(232,83,159,0.25)}
+.photo-inner{width:290px;height:350px;border-radius:60% 40% 55% 45%/50% 50% 50% 50%;background:linear-gradient(135deg,#f8d7e8,#fce4d6);border:3px dashed var(--pink-mid);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;overflow:hidden}
+.photo-initials{font-family:'Playfair Display',serif;font-size:5rem;color:var(--pink-deep);opacity:0.3;line-height:1}
+.photo-name-tag{background:white;border-radius:20px;padding:0.4rem 1rem;font-family:'Dancing Script',cursive;font-size:1rem;color:var(--pink-deep);box-shadow:0 4px 12px rgba(232,83,159,0.2)}
+
+.deco{position:absolute;pointer-events:none;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes modalIn{from{opacity:0;transform:scale(0.88) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+section{padding:5rem 2rem}
+.section-label{font-family:'Dancing Script',cursive;font-size:1.3rem;color:var(--pink-deep);text-align:center;margin-bottom:0.4rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);text-align:center;margin-bottom:3rem;color:var(--text-dark)}
+.container{max-width:1100px;margin:0 auto}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+.section-hint{text-align:center;color:var(--text-mid);font-size:0.85rem;margin-top:-2rem;margin-bottom:2rem}
+
+/* About */
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about-bio{font-size:1rem;line-height:1.9;color:var(--text-mid);margin-bottom:1.5rem}
+.traits{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:2rem}
+.trait-pill{background:var(--pink-light);color:var(--pink-deep);padding:0.4rem 1rem;border-radius:50px;font-size:0.85rem;font-weight:700}
+.edu-card{background:var(--cream);border-radius:20px;padding:1.5rem;border:1.5px solid var(--pink-light)}
+.edu-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed var(--pink-light)}
+.edu-item:last-child{margin-bottom:0;padding-bottom:0;border:none}
+.edu-icon{font-size:1.5rem;margin-top:2px}
+.edu-degree{font-weight:700;color:var(--text-dark);font-size:0.95rem}
+.edu-school{color:var(--pink-deep);font-size:0.9rem;font-weight:600}
+.edu-year{color:var(--text-mid);font-size:0.82rem;margin-top:2px}
+
+/* Works */
+#works{background:linear-gradient(180deg,var(--beige) 0%,var(--cream) 100%)}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--pink-light),var(--pink-deep),var(--peach));border-radius:2px}
+.exp-card{position:relative;margin-bottom:2.5rem;background:white;border-radius:20px;padding:1.5rem 1.5rem 1.5rem 2rem;box-shadow:0 4px 20px rgba(232,83,159,0.08);border-left:4px solid var(--pink-deep);transition:all 0.3s}
+.exp-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(232,83,159,0.18)}
+.exp-card::before{content:'';position:absolute;left:-2.6rem;top:1.5rem;width:14px;height:14px;background:var(--pink-deep);border-radius:50%;border:3px solid white;box-shadow:0 0 0 3px var(--pink-light)}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.8rem}
+.exp-role{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text-dark);font-weight:700}
+.exp-period{background:var(--peach);color:#7A4A20;padding:0.25rem 0.8rem;border-radius:50px;font-size:0.78rem;font-weight:700;white-space:nowrap}
+.exp-company{color:var(--pink-deep);font-weight:700;font-size:0.9rem;margin-bottom:0.7rem}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:0.4rem}
+.exp-points li{color:var(--text-mid);font-size:0.9rem;line-height:1.6;padding-left:1.2rem;position:relative}
+.exp-points li::before{content:'♡';position:absolute;left:0;color:var(--pink-mid);font-size:0.75rem;top:2px}
+
+/* Skills */
+#skills{background:linear-gradient(135deg,#FFF0F7 0%,#FFF5F0 100%)}
+.skills-group{margin-bottom:2.5rem}
+.skills-group-title{font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--text-mid);margin-bottom:1rem}
+.skills-bubbles{display:flex;flex-wrap:wrap;gap:0.8rem}
+.skill-pill{padding:0.6rem 1.3rem;border-radius:50px;font-size:0.9rem;font-weight:700;cursor:default;transition:transform 0.2s}
+.skill-pill:hover{transform:translateY(-3px) scale(1.05)}
+.skill-soft{background:linear-gradient(135deg,var(--pink-deep),var(--pink-mid));color:white}
+.skill-tool{background:white;color:var(--orange-accent);border:2px solid var(--peach)}
+
+/* Brands */
+#brands{background:var(--cream)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.polaroid{background:white;padding:0.7rem 0.7rem 2.5rem;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.1);transition:all 0.35s;cursor:pointer;position:relative}
+.polaroid:nth-child(odd){transform:rotate(-1.5deg)}
+.polaroid:nth-child(even){transform:rotate(1.2deg)}
+.polaroid:hover{transform:rotate(0deg) translateY(-8px) scale(1.03);box-shadow:0 20px 40px rgba(232,83,159,0.25);z-index:5}
+.polaroid-img{width:100%;border-radius:4px;aspect-ratio:4/3;overflow:hidden;margin-bottom:0.8rem;position:relative;background:var(--cream);display:flex;align-items:center;justify-content:center}
+.polaroid-img img{width:100%;height:100%;object-fit:cover;display:block}
+.polaroid-img .img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.polaroid-hint{position:absolute;inset:0;background:rgba(232,83,159,0.82);opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;border-radius:4px}
+.polaroid-hint span{color:white;font-size:0.78rem;font-weight:700;letter-spacing:1px}
+.polaroid:hover .polaroid-hint{opacity:1}
+.polaroid-badge{position:absolute;top:0.4rem;right:0.4rem;background:var(--pink-light);color:var(--pink-deep);padding:0.2rem 0.6rem;border-radius:50px;font-size:0.7rem;font-weight:700}
+.polaroid-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--text-dark);margin-bottom:0.25rem}
+.polaroid-desc{font-size:0.76rem;color:var(--text-mid);line-height:1.5}
+.view-count{font-size:0.75rem;color:var(--orange-accent);font-weight:700;margin-top:0.3rem}
+
+/* Org */
+#org{background:white}
+.org-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.org-card{background:var(--cream);border-radius:20px;padding:1.5rem;border:1.5px solid var(--pink-light);position:relative;transition:all 0.3s;cursor:pointer}
+.org-card:nth-child(1){transform:rotate(-1deg)}
+.org-card:nth-child(2){transform:rotate(0.8deg)}
+.org-card:nth-child(3){transform:rotate(0.5deg)}
+.org-card:nth-child(4){transform:rotate(-0.7deg)}
+.org-card:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 12px 30px rgba(232,83,159,0.15)}
+.org-sticker{position:absolute;top:-10px;right:1rem;background:var(--pink-deep);color:white;padding:0.3rem 0.8rem;border-radius:50px;font-size:0.75rem;font-weight:700;transform:rotate(3deg)}
+.org-emoji{font-size:2rem;margin-bottom:0.5rem}
+.org-role{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-dark);margin-bottom:0.3rem}
+.org-event{color:var(--pink-deep);font-size:0.9rem;font-weight:700;margin-bottom:0.5rem}
+.org-desc{font-size:0.88rem;color:var(--text-mid);line-height:1.6}
+.org-tap-hint{font-size:0.72rem;color:var(--pink-mid);font-weight:600;margin-top:0.7rem}
+
+/* Contact */
+#contact{background:linear-gradient(135deg,var(--pink-deep) 0%,#F07890 50%,var(--peach) 100%);position:relative;overflow:hidden}
+.contact-heading{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);color:white;text-align:center;margin-bottom:0.5rem}
+.contact-sub{text-align:center;color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:3rem}
+.contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;max-width:700px;margin:0 auto 2.5rem}
+.contact-card{background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);border-radius:20px;padding:1.2rem 1.5rem;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;gap:1rem;transition:all 0.3s}
+.contact-card:hover{background:rgba(255,255,255,0.3);transform:translateY(-3px)}
+.contact-icon{font-size:1.5rem;flex-shrink:0}
+.contact-label{color:rgba(255,255,255,0.75);font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.contact-value{color:white;font-weight:700;font-size:0.9rem;word-break:break-all}
+.contact-cta{text-align:center}
+.btn-white{background:white;color:var(--pink-deep);border:none;padding:1rem 2.5rem;border-radius:50px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.2)}
+
+footer{background:#2D1F1F;padding:2rem;text-align:center}
+footer p{color:var(--pink-light);font-family:'Dancing Script',cursive;font-size:1.2rem}
+
+/* ===== MODAL ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(45,31,31,0.78);z-index:500;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(6px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:white;border-radius:24px;max-width:900px;width:100%;height:97vh;max-height:97vh;overflow-y:auto;position:relative;padding:2rem 2rem 1.8rem;animation:modalIn 0.35s cubic-bezier(.34,1.56,.64,1) forwards}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:var(--pink-light);border:none;border-radius:50%;width:36px;height:36px;font-size:1rem;color:var(--pink-deep);cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background 0.2s;flex-shrink:0}
+.modal-close:hover{background:var(--pink-mid);color:white}
+.modal-badge{display:inline-block;background:var(--pink-light);color:var(--pink-deep);padding:0.25rem 0.8rem;border-radius:50px;font-size:0.78rem;font-weight:700;margin-bottom:0.8rem}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--text-dark);margin-bottom:0.25rem}
+.modal-subtitle{font-size:0.85rem;color:var(--pink-deep);font-weight:700;margin-bottom:1.2rem}
+.modal-photos{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.modal-photo{border-radius:14px;overflow:hidden;aspect-ratio:3/4;background:var(--cream);display:flex;align-items:center;justify-content:center}
+.modal-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.4rem;width:100%;height:100%;padding:1rem;text-align:center}
+.photo-placeholder .ph-emoji{font-size:2.8rem}
+.photo-placeholder .ph-label{font-size:0.72rem;color:var(--text-mid);font-weight:600}
+.modal-desc{font-size:0.9rem;color:var(--text-mid);line-height:1.8}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero-inner{flex-direction:column-reverse;gap:2rem;text-align:center}
+  .hero-btns{justify-content:center}
+  .hero-stats{justify-content:center}
+  .hero-bio{margin:0 auto 2rem}
+  .about-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .org-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .photo-frame{width:240px;height:280px}
+  .photo-inner{width:210px;height:250px}
+  .timeline{padding-left:1.5rem}
+  .modal-photos{grid-template-columns:1fr}
+  .contact-card:last-child{grid-column:auto}
+}
+@media(max-width:480px){
+  .portfolio-grid{grid-template-columns:1fr}
+  section{padding:3.5rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">✦ Chaca</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#org">Org</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="toggleMenu()">✕</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#works" onclick="toggleMenu()">Works</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#brands" onclick="toggleMenu()">Brands</a>
+  <a href="#org" onclick="toggleMenu()">Org</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="deco" style="top:15%;left:3%;opacity:0.6;animation:float 4s ease-in-out infinite">
+    <svg width="50" height="50" viewBox="0 0 50 50"><path d="M25,5 C25,5 28,18 40,20 C28,22 25,35 25,35 C25,35 22,22 10,20 C22,18 25,5 25,5Z" fill="#E8539F" opacity="0.5"/></svg>
+  </div>
+  <div class="deco" style="top:70%;left:5%;opacity:0.5;animation:float 5s ease-in-out infinite 1s">
+    <svg width="36" height="36" viewBox="0 0 36 36"><text y="28" font-size="28">✦</text></svg>
+  </div>
+  <div class="deco" style="top:20%;right:5%;opacity:0.55;animation:float 3.5s ease-in-out infinite 0.5s">
+    <svg width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="10" fill="none" stroke="#F0A050" stroke-width="2.5"/><path d="M22 12 L22 32 M12 22 L32 22 M14.6 14.6 L29.4 29.4 M29.4 14.6 L14.6 29.4" stroke="#F0A050" stroke-width="2" stroke-linecap="round"/></svg>
+  </div>
+  <div class="deco" style="bottom:20%;right:3%;opacity:0.5;animation:float 6s ease-in-out infinite 1.5s">
+    <svg width="40" height="40" viewBox="0 0 40 40"><path d="M20,3 C12,3 5,9.3 5,17.5 C5,25.7 20,37 20,37 C20,37 35,25.7 35,17.5 C35,9.3 28,3 20,3Z" fill="#F0A0CC" opacity="0.7"/></svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-label">✦ Marketing Communication Graduate ✦</p>
+      <h1 class="hero-name">Aprilia<br/><span>Angelica</span></h1>
+      <p class="hero-tagline">KOL Specialist · Partnership Builder · Campaign Creator</p>
+      <p class="hero-bio">Hi, I'm Chaca! Passionate about creating impactful marketing campaigns, managing influencer collaborations, and building meaningful brand relationships in the digital landscape.</p>
+      <div class="hero-btns">
+        <a href="#brands" class="btn-primary">View My Work →</a>
+        <a href="#contact" class="btn-outline">Say Hello ♡</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">300+</div><div class="stat-label">KOL Profiles</div></div>
+        <div class="stat"><div class="stat-num">80%</div><div class="stat-label">Response Rate</div></div>
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Partnerships</div></div>
+        <div class="stat"><div class="stat-num">200M+</div><div class="stat-label">Deal Value (IDR)</div></div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <div class="photo-inner" style="position:relative">
+            <img src="assets/profiles.jpg" style="width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.5);transform-origin:center 70%;">
+            <div class="photo-name-tag" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);white-space:nowrap">✦ Chaca ✦</div>
+        </div>
+      </div>
+      <div style="position:absolute;top:-15px;right:-10px;background:var(--pink-deep);color:white;border-radius:50%;width:54px;height:54px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;animation:float 3s ease-in-out infinite">♡</div>
+      <div style="position:absolute;bottom:-10px;left:-15px;background:var(--orange-accent);color:white;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:1rem;animation:float 4s ease-in-out infinite 0.8s">✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">✦ about me ✦</p>
+    <h2 class="section-title">Let's Get To Know Me</h2>
+    <div class="about-grid reveal">
+      <div>
+        <p class="about-bio">I'm a Marketing Communication graduate from <strong>BINUS University</strong> with hands-on experience in KOL management, brand partnerships, and campaign execution. I love turning ideas into impactful digital experiences.</p>
+        <p class="about-bio">Having worked with brands across F&B, beauty, and lifestyle — from Haus! Indonesia to Bakmi GM and Emeron Lovely — I bring a mix of strategic thinking and creative energy to every project.</p>
+        <div class="traits">
+          <span class="trait-pill">💬 Communicative</span>
+          <span class="trait-pill">🎨 Creative</span>
+          <span class="trait-pill">🔍 Detail-Oriented</span>
+          <span class="trait-pill">🤝 Team Player</span>
+          <span class="trait-pill">🗣️ Negotiator</span>
+          <span class="trait-pill">📱 Digital Native</span>
+        </div>
+      </div>
+      <div>
+        <div class="edu-card">
+          <p style="font-family:'Dancing Script',cursive;font-size:1.1rem;color:var(--pink-deep);margin-bottom:1rem">✦ education ✦</p>
+          <div class="edu-item">
+            <div class="edu-icon">🎓</div>
+            <div>
+              <div class="edu-degree">Marketing Communication</div>
+              <div class="edu-school">BINUS University</div>
+              <div class="edu-year">September 2021 – December 2025</div>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon">🏫</div>
+            <div>
+              <div class="edu-degree">Social Science Student</div>
+              <div class="edu-school">SMAN 23 Jakarta</div>
+              <div class="edu-year">August 2018 – August 2021</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="container">
+    <p class="section-label">✦ work experience ✦</p>
+    <h2 class="section-title">Where I've Worked</h2>
+    <div class="timeline reveal">
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">🌟 KOL Specialist</div>
+          <span class="exp-period">Jul 2025 – Mar 2026</span>
+        </div>
+        <div class="exp-company">PT Headstart Digital Adventindo (Headstart Digital)</div>
+        <ul class="exp-points">
+          <li>Researched, curated, and maintained 300+ KOL profiles across lifestyle, F&B, and fashion categories</li>
+          <li>Executed KOL outreach and relationship management, achieving up to 80% response rate</li>
+          <li>Coordinated campaign timelines with KOLs, ensuring on-time deliverables</li>
+          <li>Analyzed KOL performance reports for brands like Paul, Krispy Kreme, Bakmi GM, and Nissin</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">📦 Marketing Comm. / Admin Intern</div>
+          <span class="exp-period">Apr 2025 – Jul 2025</span>
+        </div>
+        <div class="exp-company">PT LSP IND Logistik Indonesia</div>
+        <ul class="exp-points">
+          <li>Executed promotional communication strategies for certification program outreach</li>
+          <li>Coordinated with internal operations team to ensure smooth program execution</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">🧋 KOL Management Specialist Intern</div>
+          <span class="exp-period">Sep 2024 – Mar 2025</span>
+        </div>
+        <div class="exp-company">PT Inspirasi Bisnis Nusantara (Haus! Indonesia)</div>
+        <ul class="exp-points">
+          <li>Identified, analyzed, and recruited KOLs aligned with brand identity and target audience</li>
+          <li>Managed end-to-end KOL relationships: negotiations, briefing, content coordination, and performance tracking</li>
+          <li>Developed long-term KOL relationships, securing repeat collaborations for seasonal campaigns</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">📺 Stakeholder Relations & Partnership Intern</div>
+          <span class="exp-period">Feb 2024 – Aug 2024</span>
+        </div>
+        <div class="exp-company">PT Cakrawala Andalas Televisi (ANTV Digital)</div>
+        <ul class="exp-points">
+          <li>Built and maintained 10+ active brand partnerships for digital programs (Jago Dangdut & Intip Seleb)</li>
+          <li>Developed and delivered 5+ sponsorship proposals and MoMs, contributing to deals valued at IDR 200M+</li>
+          <li>Collaborated with internal and external stakeholders to ensure smooth campaign execution</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">☕ Digital Media Intern</div>
+          <span class="exp-period">Jul 2022 – Oct 2022</span>
+        </div>
+        <div class="exp-company">PT Kopi Opa Korea (Kopi Chuseyo)</div>
+        <ul class="exp-points">
+          <li>Developed and executed social media content strategies to increase engagement</li>
+          <li>Created and scheduled content using Canva across digital platforms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">✦ skills & tools ✦</p>
+    <h2 class="section-title">What I Bring to the Table</h2>
+    <div class="reveal">
+      <div class="skills-group">
+        <p class="skills-group-title">✦ soft skills</p>
+        <div class="skills-bubbles">
+          <span class="skill-pill skill-soft" style="animation:float 4s ease-in-out infinite">🎯 KOL Management</span>
+          <span class="skill-pill skill-soft" style="animation:float 5s ease-in-out infinite 0.5s">📣 Campaign Planning & Execution</span>
+          <span class="skill-pill skill-soft" style="animation:float 4.5s ease-in-out infinite 1s">🤝 Stakeholder Relations</span>
+          <span class="skill-pill skill-soft" style="animation:float 3.5s ease-in-out infinite 0.3s">💬 Communication</span>
+          <span class="skill-pill skill-soft" style="animation:float 5.5s ease-in-out infinite 0.8s">🗣️ Negotiation</span>
+          <span class="skill-pill skill-soft" style="animation:float 4s ease-in-out infinite 1.2s">👥 Teamwork</span>
+          <span class="skill-pill skill-soft" style="animation:float 3.8s ease-in-out infinite 0.6s">🌐 Partnership Development</span>
+        </div>
+      </div>
+      <div class="skills-group">
+        <p class="skills-group-title">✦ tools & language</p>
+        <div class="skills-bubbles">
+          <span class="skill-pill skill-tool" style="animation:float 4.2s ease-in-out infinite 0.4s">🎨 Canva</span>
+          <span class="skill-pill skill-tool" style="animation:float 5s ease-in-out infinite 0.9s">📊 Google Sheets</span>
+          <span class="skill-pill skill-tool" style="animation:float 4.6s ease-in-out infinite 1.3s">💼 Microsoft Office</span>
+          <span class="skill-pill skill-tool" style="animation:float 3.9s ease-in-out infinite 0.2s">🌍 English (Professional)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section id="brands">
+  <div class="container">
+    <p class="section-label">✦ brands & campaigns ✦</p>
+    <h2 class="section-title">Brands I've Worked With</h2>
+    <p class="section-hint">Click the card to look at the pics ♡</p>
+    <div class="portfolio-grid reveal">
+
+      <div class="polaroid" onclick="openModal('brand','tracy')">
+        <div class="polaroid-img">
+          <img src="assets/brands/tracy-cover.png" alt="Tracy Salon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">💇‍♀️</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">Beauty</span>
+        <div class="polaroid-title">Tracy Salon</div>
+        <div class="polaroid-desc">Photo & Video Talent — Campaign photos & videos</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','crystalin')">
+        <div class="polaroid-img">
+          <img src="assets/brands/crystalin-cover.png" alt="Crystalin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">💧</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">F&B</span>
+        <div class="polaroid-title">Crystalin</div>
+        <div class="polaroid-desc">Monthly Campaign Photos & Videos</div>
+        <div class="view-count">✦ 1,400+ views per post</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','bakmigm')">
+        <div class="polaroid-img">
+          <img src="assets/brands/bakmigm-cover.webp" alt="Bakmi GM" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">🍜</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">F&B</span>
+        <div class="polaroid-title">Bakmi GM</div>
+        <div class="polaroid-desc">Photo Talent — Multiple campaign series</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','emeron')">
+        <div class="polaroid-img">
+          <img src="assets/brands/emeron-cover.png" alt="Emeron Lovely" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">🧴</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">Lifestyle</span>
+        <div class="polaroid-title">Emeron Lovely</div>
+        <div class="polaroid-desc">Video Talent — Lifestyle Campaign Video</div>
+        <div class="view-count">✦ 1.1M views!</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','haus')">
+        <div class="polaroid-img">
+          <img src="assets/brands/haus-cover.png" alt="Haus! Indonesia" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">🧋</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">F&B</span>
+        <div class="polaroid-title">Haus! Indonesia</div>
+        <div class="polaroid-desc">Monthly Campaign Videos (F&B)</div>
+        <div class="view-count">✦ Up to 531K views</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','ganjelroti')">
+        <div class="polaroid-img">
+          <img src="assets/brands/ganjelroti-cover.png" alt="Ganjel Roti" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">🍞</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">F&B</span>
+        <div class="polaroid-title">Ganjel Roti</div>
+        <div class="polaroid-desc">Monthly Campaign Photos (F&B)</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','hotoppa')">
+        <div class="polaroid-img">
+          <img src="assets/brands/hotoppa-cover.png" alt="Hot Oppa Mie Korea" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">🍲</div>
+          <div class="polaroid-hint"><span>♡</span><span>LIHAT FOTO</span></div>
+        </div>
+        <span class="polaroid-badge">F&B</span>
+        <div class="polaroid-title">Hot Oppa Mie Korea</div>
+        <div class="polaroid-desc">Monthly Campaign Photos & Videos</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ORG -->
+<section id="org">
+  <div class="container">
+    <p class="section-label">✦ beyond the desk ✦</p>
+    <h2 class="section-title">Organizational Experience</h2>
+    <p class="section-hint">Click the card to look at the pics ♡</p>
+    <div class="org-grid reveal">
+
+      <div class="org-card" onclick="openModal('org','mc')">
+        <span class="org-sticker">2024</span>
+        <div class="org-emoji">
+            <img src="assets/org/pramdoel-cover.png" alt="Pram Doel"
+                style="width:60px;height:60px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="org-role">Master of Ceremony</div>
+        <div class="org-event">Tournament: Piala Pram-Doel 2025</div>
+        <div class="org-desc">Hosted an event with 100+ participants, guided event flow including matches, awarding sessions, and coordinated with technical team for smooth execution.</div>
+        <div class="org-tap-hint">✦ Tap to view photos</div>
+      </div>
+
+      <div class="org-card" onclick="openModal('org','chrisye')">
+        <span class="org-sticker">2024</span>
+        <div class="org-emoji">
+            <img src="assets/org/chrisye-cover.jpeg" alt="Chrisye"
+                style="width:60px;height:60px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="org-role">Liaison Officer (LO)</div>
+        <div class="org-event">Lifetime: Tribute to Chrisye 2024</div>
+        <div class="org-desc">Liaised between 3 guest artists and event organizer, managed schedules, on-site logistics, and ensured artist comfort throughout the event.</div>
+        <div class="org-tap-hint">✦ Tap to view photos</div>
+      </div>
+
+      <div class="org-card" onclick="openModal('org','u4kids')">
+        <span class="org-sticker">2023</span>
+        <div class="org-emoji">
+            <img src="assets/org/u4kids-cover.png" alt="U4Kids"
+                style="width:60px;height:60px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="org-role">Project Manager Event</div>
+        <div class="org-event">U4Kids Fundraising Event</div>
+        <div class="org-desc">Led 15+ volunteers across event, PR, logistics, and publication divisions. Planned budgeting and promotional strategies for a 40+ attendee children's educational event.</div>
+        <div class="org-tap-hint">✦ Tap to view photos</div>
+      </div>
+
+      <div class="org-card" onclick="openModal('org','gaming')">
+        <span class="org-sticker">2022–23</span>
+        <div class="org-emoji">
+            <img src="assets/org/binusgaming-cover.png" alt="Gaming"
+                style="width:60px;height:60px;object-fit:cover;border-radius:12px;">
+        </div>
+        <div class="org-role">Division Head — PUBGM</div>
+        <div class="org-event">Binusian Gaming, BINUS University</div>
+        <div class="org-desc">Organized PUBGM activities, tournaments, and competitions. Developed strategies to grow the division and attract new members. Represented the unit at international esports events.</div>
+        <div class="org-tap-hint">✦ Tap to view photos</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="deco" style="top:10%;left:5%;opacity:0.3">
+    <svg width="80" height="80" viewBox="0 0 80 80"><path d="M40,5 C40,5 48,30 65,32 C48,34 40,60 40,60 C40,60 32,34 15,32 C32,30 40,5 40,5Z" fill="white"/></svg>
+  </div>
+  <div class="deco" style="bottom:15%;right:5%;opacity:0.25">
+    <svg width="60" height="60" viewBox="0 0 60 60"><text y="45" font-size="45" fill="white">✦</text></svg>
+  </div>
+  <div class="container">
+    <p class="section-label" style="color:rgba(255,255,255,0.8)">✦ let's connect ✦</p>
+    <h2 class="contact-heading">Say Hello! ♡</h2>
+    <p class="contact-sub">Open for exciting opportunities in KOL, Partnerships, and Marketing</p>
+    <div class="contact-grid reveal">
+        <div class="contact-card" onclick="window.open('mailto:chacaa.work@gmail.com','_blank')" style="cursor:pointer">
+            <div class="contact-icon">📧</div>
+            <div><div class="contact-label">Email</div><div class="contact-value">chacaa.work@gmail.com</div></div>
+        </div>
+        <div class="contact-card" onclick="window.open('https://wa.me/6287841015590','_blank')" style="cursor:pointer">
+            <div class="contact-icon">📱</div>
+            <div><div class="contact-label">Phone / WhatsApp</div><div class="contact-value">0878-4101-5590</div></div>
+        </div>
+        <div class="contact-card" onclick="window.open('https://instagram.com/aprilianglca','_blank')" style="cursor:pointer">
+            <div class="contact-icon">📸</div>
+            <div><div class="contact-label">Instagram</div><div class="contact-value">@aprilianglca</div></div>
+        </div>
+        <div class="contact-card" onclick="window.open('https://linkedin.com/in/aprilianglca','_blank')" style="cursor:pointer">
+            <div class="contact-icon">💼</div>
+            <div><div class="contact-label">LinkedIn</div><div class="contact-value">linkedin.com/in/aprilianglca</div></div>
+        </div>
+        </div>
+    <div class="contact-cta">
+      <button class="btn-white">
+        Let's Work Together!
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Made with ♡ by Aprilia Angelica · 2026</p>
+  <p style="font-family:'Nunito',sans-serif;font-size:0.8rem;color:rgba(255,214,232,0.5);margin-top:0.5rem">Marketing Communication · KOL Specialist · Partnership Enthusiast</p>
+</footer>
+
+<script>
+/* ============================================================
+   DATA FOTO
+   Ganti path "assets/..." dengan nama file foto kamu yang sebenarnya.
+   Format: assets/brands/nama-file.jpg  atau  assets/org/nama-file.jpg
+   
+   coverImg  = foto yang muncul di card depan (thumbnail)
+   photo1    = foto pertama di modal popup
+   photo2    = foto kedua di modal popup
+============================================================ */
+const DATA = {
+  brand: {
+    tracy:      { badge:'Beauty',    title:'Tracy Salon',         role:'Photo & Video Talent',
+                  desc:'Beauty campaign for Tracy Salon, showcasing hair styling results. Deliverables include campaign photos and videos for the salon’s digital content.',
+                  p1:'assets/brands/dokum/tracy-1.png',    e1:'💇‍♀️', l1:'Campaign Photo 1',
+                  p2:'assets/brands/dokum/tracy-2.png',    e2:'✨',   l2:'Campaign Photo 2' },
+    crystalin:  { badge:'F&B',       title:'Crystalin',           role:'Photo & Video Talent',
+                  desc:'Monthly campaign photos and videos for Crystalin. Each post reached 1,400+ views with relatable and fresh storytelling concepts.',
+                  p1:'assets/brands/dokum/crystalin-1.png',e1:'💧',  l1:'Campaign Video 1',
+                  p2:'assets/brands/dokum/crystalin-2.png',e2:'🎬', l2:'Campaign Video 2' },
+    bakmigm:    { badge:'F&B',       title:'Bakmi GM',            role:'Photo Talent',
+                  desc:'Multiple campaign photo series for Bakmi GM. Featured in various seasonal promotional content and brand campaigns on Instagram and TikTok.',
+                  p1:'assets/brands/dokum/bakmigm-1.png',  e1:'🍜', l1:'Campaign Photo 1',
+                  p2:'assets/brands/dokum/bakmigm-2.png',  e2:'📸', l2:'Campaign Photo 2' },
+    emeron:     { badge:'Lifestyle', title:'Emeron Lovely',       role:'Video Talent',
+                  desc:'Campaign video for Emeron Lovely products. The video reached 1.1 million views — the biggest achievement in my content creation career!',
+                  p1:'assets/brands/dokum/emeron-1.png',   e1:'🧴', l1:'Campaign Video (1.1M views!)',
+                  p2:'assets/brands/dokum/emeron-2.png',   e2:'🎥', l2:'Behind the Scene' },
+    haus:       { badge:'F&B',       title:'Haus! Indonesia',     role:'Video Talent',
+                  desc:'Monthly campaign videos for Haus! Indonesia. Several videos went viral, reaching up to 531K views, featuring relatable office and daily life concepts.',
+                  p1:'assets//brands/dokum/haus-1.png',     e1:'🧋', l1:'Campaign Video (531K views)',
+                  p2:'assets/brands/dokum/haus-2.png',     e2:'📹', l2:'Campaign Video (173K views)' },
+    ganjelroti: { badge:'F&B',       title:'Ganjel Roti',         role:'Photo Talent',
+                  desc:'Monthly campaign photos for @ganjelroti — fun and relatable F&B content, posted on the brand’s Instagram and TikTok.',
+                  p1:'assets/brands/dokum/ganjelroti-1.png',e1:'🍞',l1:'Campaign Photo 1',
+                  p2:'assets/brands/dokum/ganjelroti-2.png',e2:'📸',l2:'Campaign Photo 2' },
+    hotoppa:    { badge:'F&B',       title:'Hot Oppa Mie Korea',  role:'Photo & Video Talent',
+                  desc:'Monthly campaign photos and videos for @hotoppamiekorea. Content varies from couple content to friend group vibes that are engaging.',
+                  p1:'assets/brands/dokum/hotoppa-1.png',  e1:'🍲', l1:'Campaign Video 1',
+                  p2:'assets/brands/dokum/hotoppa-2.png',  e2:'🎬', l2:'Campaign Video 2' }
+  },
+  org: {
+    mc:      { title:'Master of Ceremony',     event:'Tournament: Piala Pram-Doel 2024',
+               desc:'Hosted an event attended by 100+ participants. Opened and closed the event, guided the tournament flow and awarding sessions, and coordinated with the committee and technical team.',
+               p1:'assets/org/dokum/mc-1.png', e1:'🎤', l1:'Saat memandu acara',
+               p2:'assets/org/dokum/mc-2.png', e2:'🏆', l2:'Sesi awarding' },
+    chrisye: { title:'Liaison Officer (LO)',   event:'Lifetime: Tribute to Chrisye 2024',
+               desc:'Acted as LO for 3 guest artists. Ensured artists’ needs were met, coordinated schedules, on-site logistics, and technical smoothness throughout the event.',
+               p1:'assets/org/dokum/chrisye-1.png', e1:'🎶', l1:'With the event team',
+               p2:'assets/org/dokum/chrisye-2.png', e2:'🎵', l2:'Backstage documentation' },
+    u4kids:  { title:'Project Manager Event', event:'U4Kids Fundraising Event — Desember 2023',
+               desc:'Led a team of 15+ volunteers across different departments (event, PR, logistics, publicity). Planned concepts, budgeting, and promotion strategies for an educational event for children with over 40 participants.',
+               p1:'assets/org/dokum/u4kids-1.png', e1:'💼', l1:'U4Kids volunteer team',
+               p2:'assets/org/dokum/u4kids-2.png', e2:'🎨', l2:'Dekorasi & venue' },
+    gaming:  { title:'Division Head — PUBGM', event:'Binusian Gaming, BINUS University (2022–2023)',
+               desc:'Led the PUBGM division of Binusian Gaming by organizing tournaments, mentoring members, and representing the organization at international events such as PUBG Mobile Global Championship and Mobile Legends Professional League Invitational.',
+               p1:'assets/org/dokum/gaming-1.png', e1:'🎮', l1:'Tim Binusian Gaming',
+               p2:'assets/org/dokum/gaming-2.png', e2:'🏟️', l2:'Event MPLI 2023' }
+  }
+};
+
+function photoCard(src, emoji, label) {
+  return `<div class="modal-photo">
+    <img src="${src}" alt="${label}"
+      onerror="this.outerHTML='<div class=\\'photo-placeholder\\'><span class=\\'ph-emoji\\'>${emoji}</span><span class=\\'ph-label\\'>${label}</span></div>'"/>
+  </div>`;
+}
+
+function openModal(type, key) {
+  const d = DATA[type][key];
+  if (!d) return;
+  const badge = type === 'brand' ? d.badge : 'Organizational';
+  document.getElementById('modalContent').innerHTML = `
+    <span class="modal-badge">${badge}</span>
+    <h2 class="modal-title">${d.title}</h2>
+    <p class="modal-subtitle">${type === 'brand' ? 'Role: ' + d.role : d.event}</p>
+    <div class="modal-photos">
+      ${photoCard(d.p1, d.e1, d.l1)}
+      ${photoCard(d.p2, d.e2, d.l2)}
+    </div>
+    <p class="modal-desc">${d.desc}</p>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* Navbar */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+/* Active nav */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+
+/* Scroll reveal */
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
