@@ -415,7 +415,7 @@ footer p{color:var(--pink-light);font-family:'Dancing Script',cursive;font-size:
           <span class="skill-pill skill-tool" style="animation:float 4.2s ease-in-out infinite 0.4s">🎨 Canva</span>
           <span class="skill-pill skill-tool" style="animation:float 5s ease-in-out infinite 0.9s">📊 Google Sheets</span>
           <span class="skill-pill skill-tool" style="animation:float 4.6s ease-in-out infinite 1.3s">💼 Microsoft Office</span>
-          <span class="skill-pill skill-tool" style="animation:float 3.9s ease-in-out infinite 0.2s">🌍 English (Professional)</span>
+          <span class="skill-pill skill-tool" style="animation:float 3.9s ease-in-out infinite 0.2s">🌍 English</span>
         </div>
       </div>
     </div>
@@ -429,6 +429,28 @@ footer p{color:var(--pink-light);font-family:'Dancing Script',cursive;font-size:
     <h2 class="section-title">Brands I've Worked With</h2>
     <p class="section-hint">Click the card to look at the pics ♡</p>
     <div class="portfolio-grid reveal">
+
+      <div class="polaroid" onclick="openModal('brand','lavere')">
+        <div class="polaroid-img">
+          <img src="assets/brands/lavere-cover.jpg" alt="Lavere" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">💄</div>
+          <div class="polaroid-hint"><span>♡</span><span>VIEW IMAGES</span></div>
+        </div>
+        <span class="polaroid-badge">Beauty</span>
+        <div class="polaroid-title">Lavere</div>
+        <div class="polaroid-desc">Photo & Video Talent — Campaign photos & videos</div>
+      </div>
+
+      <div class="polaroid" onclick="openModal('brand','tracy')">
+        <div class="polaroid-img">
+          <img src="assets/brands/tracy-cover.png" alt="Tracy Salon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">💇‍♀️</div>
+          <div class="polaroid-hint"><span>♡</span><span>VIEW IMAGES</span></div>
+        </div>
+        <span class="polaroid-badge">Beauty</span>
+        <div class="polaroid-title">Tracy Salon</div>
+        <div class="polaroid-desc">Photo & Video Talent — Campaign photos & videos</div>
+      </div>
 
       <div class="polaroid" onclick="openModal('brand','emeron')">
         <div class="polaroid-img">
@@ -453,18 +475,6 @@ footer p{color:var(--pink-light);font-family:'Dancing Script',cursive;font-size:
         <div class="polaroid-desc">Photo Talent — Multiple campaign series</div>
       </div>
 
-      <div class="polaroid" onclick="openModal('brand','haus')">
-        <div class="polaroid-img">
-          <img src="assets/brands/haus-cover.png" alt="Haus! Indonesia" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="img-placeholder" style="display:none">🧋</div>
-          <div class="polaroid-hint"><span>♡</span><span>VIEW IMAGES</span></div>
-        </div>
-        <span class="polaroid-badge">F&B</span>
-        <div class="polaroid-title">Haus! Indonesia</div>
-        <div class="polaroid-desc">Monthly Campaign Videos</div>
-        <div class="view-count">✦ Up to 531K views</div>
-      </div>
-
       <div class="polaroid" onclick="openModal('brand','crystalin')">
         <div class="polaroid-img">
           <img src="assets/brands/crystalin-cover.png" alt="Crystalin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
@@ -477,26 +487,16 @@ footer p{color:var(--pink-light);font-family:'Dancing Script',cursive;font-size:
         <div class="view-count">✦ 1,400+ views per post</div>
       </div>
 
-      <div class="polaroid" onclick="openModal('brand','tracy')">
+      <div class="polaroid" onclick="openModal('brand','haus')">
         <div class="polaroid-img">
-          <img src="assets/brands/tracy-cover.png" alt="Tracy Salon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="img-placeholder" style="display:none">💇‍♀️</div>
+          <img src="assets/brands/haus-cover.png" alt="Haus! Indonesia" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="img-placeholder" style="display:none">🧋</div>
           <div class="polaroid-hint"><span>♡</span><span>VIEW IMAGES</span></div>
         </div>
-        <span class="polaroid-badge">Beauty</span>
-        <div class="polaroid-title">Tracy Salon</div>
-        <div class="polaroid-desc">Photo & Video Talent — Campaign photos & videos</div>
-      </div>
-
-      <div class="polaroid" onclick="openModal('brand','lavere')">
-        <div class="polaroid-img">
-          <img src="assets/brands/lavere-cover.jpg" alt="Lavere" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="img-placeholder" style="display:none">💄</div>
-          <div class="polaroid-hint"><span>♡</span><span>VIEW IMAGES</span></div>
-        </div>
-        <span class="polaroid-badge">Beauty</span>
-        <div class="polaroid-title">Lavere</div>
-        <div class="polaroid-desc">Photo & Video Talent — Campaign photos & videos</div>
+        <span class="polaroid-badge">F&B</span>
+        <div class="polaroid-title">Haus! Indonesia</div>
+        <div class="polaroid-desc">Monthly Campaign Videos</div>
+        <div class="view-count">✦ Up to 531K views</div>
       </div>
 
       <div class="polaroid" onclick="openModal('brand','ganjelroti')">
